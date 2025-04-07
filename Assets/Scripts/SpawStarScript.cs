@@ -8,6 +8,7 @@ public class SpawStarScript : MonoBehaviour
     public float posicao;
     public GameObject moeda;
     public GameObject estrela;
+    public GameObject powerUP;
 
     public float tempo = 0;
     private int escalonamento = 3;
@@ -26,18 +27,22 @@ public class SpawStarScript : MonoBehaviour
        tempo += Time.deltaTime;
        if(tempo >= escalonamento)
        {
-        int rand = Random.Range(1,5);
-        if(rand >= 3)
-        {
-            Instantiate(moeda, this.transform.position, this.transform.rotation);
-            cs.atualizarCoin();
-        }
-        else if(rand <= 2)
-        {
-            Instantiate(estrela, this.transform.position, this.transform.rotation);
-            cs.atualizarEstrela();
-        }
-        posicao = Random.Range(-8f,8f);
+        int rand = Random.Range(1,7);
+            if (rand >= 3 && rand <= 5)
+            {
+                Instantiate(moeda, this.transform.position, this.transform.rotation);
+                cs.atualizarCoin();
+            }
+            else if (rand <= 2)
+            {
+                Instantiate(estrela, this.transform.position, this.transform.rotation);
+                cs.atualizarEstrela();
+            }
+            else if(rand >= 6)
+            {
+                Instantiate(powerUP, this.transform.position, this.transform.rotation);
+            }
+            posicao = Random.Range(-8f,8f);
         transform.position = new Vector2(posicao,6);
         tempo = 0;
         escalonamento = Random.Range(0,num);
